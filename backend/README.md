@@ -43,10 +43,10 @@ From within the `./src` directory first ensure you are working using your create
 To run the server, execute:
 
 ```bash
+export FLASK_RUN=flaskr
+export FLASK_DEBUG=True
 flask run --reload
 ```
-
-The `--reload` flag will detect file changes and restart the server automatically.
 
 ## To Do Tasks
 
@@ -73,7 +73,7 @@ You will need to provide detailed documentation of your API endpoints including 
 
 ### Documentation Example
 
-`GET '/api/v1.0/categories'`
+`GET '/categories'`
 
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
@@ -81,12 +81,104 @@ You will need to provide detailed documentation of your API endpoints including 
 
 ```json
 {
-  "1": "Science",
-  "2": "Art",
-  "3": "Geography",
-  "4": "History",
-  "5": "Entertainment",
-  "6": "Sports"
+  "categories": {
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
+    "6": "Sports"
+  },
+  "success": true
+}
+```
+
+`GET '/questions'`
+
+- Fetches paginated questions in the format below
+- Request Arguments: None
+- Returns: An object with a single key, `categories`, that contains an object of `id: category_string` key: value pairs and a list of paginated questions
+
+```json
+{
+  "categories": {
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
+    "6": "Sports"
+  },
+  "current_category": null,
+  "questions": [
+    {
+      "answer": "Joe Biden",
+      "category": 4,
+      "difficulty": 1,
+      "id": 5,
+      "question": "Who is the president of Nigera?"
+    },
+    {
+      "answer": "China",
+      "category": 2,
+      "difficulty": 1,
+      "id": 16,
+      "question": "What is the most largest country in the world according to population"
+    }
+  ],
+  "success": true,
+  "total_questions": 2
+}
+```
+
+`DELETE '/questions/id'`
+
+- Deletes question with id specified as a parameter
+- Request Arguments: <int:id>
+- Returns: An object with a single key, `categories`, that contains an object of `id: category_string` key: value pairs.
+
+```json
+{
+"success": True,
+"deleted": id
+}
+```
+
+`POST '/questions'`
+
+- Adds a new question to the trivia database
+- Request Arguments: `json{ "question": "", "answer": '', "difficulty": 5, "category": 2, }`
+
+- Returns: An object with a single key, `created `, that contains the `id` of the created question.
+
+```json
+{
+  "created": id,
+  "success": true
+}
+```
+
+`POST '/questions/search'`
+
+- Does a case insensitive search of the search string provided in the body.
+- Request body: json`{searchTerm:string}`
+- Returns: An object with a list of questions that match the query and the total number of matches
+  Example response:
+
+```json
+{
+  "current_category": null,
+  "questions": [
+    {
+      "answer": "Chile",
+      "category": 6,
+      "difficulty": 4,
+      "id": 17,
+      "question": "Who won the 1930 world cup?"
+    }
+  ],
+  "success": true,
+  "total_questions": 1
 }
 ```
 
