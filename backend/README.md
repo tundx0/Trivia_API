@@ -139,8 +139,8 @@ You will need to provide detailed documentation of your API endpoints including 
 
 ```json
 {
-"success": True,
-"deleted": id
+"success": true,
+"deleted": "id"
 }
 ```
 
@@ -153,7 +153,7 @@ You will need to provide detailed documentation of your API endpoints including 
 
 ```json
 {
-  "created": id,
+  "created": "id",
   "success": true
 }
 ```
@@ -189,7 +189,7 @@ You will need to provide detailed documentation of your API endpoints including 
 - Returns: An object with a list of questions in the same category, the total number of questions in the category and the current_category.
   Example response:
 
-json```
+```json
 {
 "current_category": "3",
 "questions": [
@@ -223,12 +223,12 @@ json```
 
 `POST '/quizzes'`
 - Accepts a json object of previous questions and the category_id to generate a random question not in the previous questions.
-- Request Body: json```{"previous_questions": list, "quiz_category": {"id": int, "type": string}}```
+- Request Body: ```json{"previous_questions": list, "quiz_category": {"id": int, "type": string}}```
 - Response: Random question object
 
 Example:
 
-json```
+```json
   {"questions":
     {
       "answer": "Lake Victoria",
