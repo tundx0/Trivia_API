@@ -182,6 +182,68 @@ You will need to provide detailed documentation of your API endpoints including 
 }
 ```
 
+`GET '/categories/<int:category_id>/questions'`
+
+- Retrieves all the questions under specified category.
+- Request Parameter: `category_id`
+- Returns: An object with a list of questions in the same category, the total number of questions in the category and the current_category.
+  Example response:
+
+json```
+{
+"current_category": "3",
+"questions": [
+{
+"answer": "Lake Victoria",
+"category": 3,
+"difficulty": 2,
+"id": 13,
+"question": "What is the largest lake in Africa?"
+},
+{
+"answer": "The Palace of Versailles",
+"category": 3,
+"difficulty": 3,
+"id": 14,
+"question": "In which royal palace would you find the Hall of Mirrors?"
+},
+{
+"answer": "Agra",
+"category": 3,
+"difficulty": 2,
+"id": 15,
+"question": "The Taj Mahal is located in which Indian city?"
+}
+],
+"success": true,
+"total_questions": 3
+}
+
+````
+
+`POST '/quizzes'`
+- Accepts a json object of previous questions and the category_id to generate a random question not in the previous questions.
+- Request Body: json```{"previous_questions": list, "quiz_category": {"id": int, "type": string}}```
+- Response: Random question object
+
+Example:
+
+json```
+  {"questions":
+    {
+      "answer": "Lake Victoria",
+      "category": 3,
+      "difficulty": 2,
+      "id": 13,
+      "question": "What is the largest lake in Africa?"
+    },
+    "success": true
+  }
+
+```
+
+
+
 ## Testing
 
 Write at least one test for the success and at least one error behavior of each endpoint using the unittest library.
@@ -193,4 +255,4 @@ dropdb trivia_test
 createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
-```
+````
